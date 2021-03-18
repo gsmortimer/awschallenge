@@ -2,6 +2,10 @@
 //php-based whois plugin
 include 'phpWhois.org/src/whois.main.php';
 
+$PERMITTED_DOMAIN="";
+
+validate_referer ();
+
 //get public IP
 $ip_addr = get_ip();
 
@@ -17,6 +21,18 @@ if (check_ip($ip_addr)) {
         header("HTTP/1.1 500 Server Error");
         echo ("Somehow, your Public IP is not a valid IP address");
 }
+
+//ensure referal; came from same domain
+function validate_referer () {
+        $referer = $_SERVER['HTTP_REFERER'];
+        if (!preg_match("/^https?:\/\/([\w\d]+\.)?" . $GLOBALS["PERMITTED_DOMAIN"] . "/", $referer)) {
+                header("HTTP/1.1 401 Unauthorised");
+                echo ("Sorry, we do not allow referrals");
+                exit;
+
+        }
+}
+
 
 //Obtain Client's public IP
 function get_ip () {

@@ -1,6 +1,9 @@
 <?php
+$PERMITTED_DOMAIN="";
 
-echo get_ip();
+validate_referer ();
+
+echo (get_ip());
 
 //Obtain Client's public IP
 function get_ip () {
@@ -18,4 +21,16 @@ function get_ip () {
         }
         return $ip_address;
 }
+
+//ensure referal; came from same domain
+function validate_referer () {
+        $referer = $_SERVER['HTTP_REFERER'];
+        if (!preg_match("/^https?:\/\/([\w\d]+\.)?" . $GLOBALS["PERMITTED_DOMAIN"] . "/", $referer)) {
+                header("HTTP/1.1 401 Unauthorised");
+                echo ("Sorry, we do not allow referrals");
+                exit;
+
+        }
+}
+
 ?>

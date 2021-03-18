@@ -27,10 +27,6 @@ if (check_ip($ip_addr)) {
 
 //ensure referal; came from same domain
 function validate_referer () {
-        //if PERMITTED_DOMAIN is empty, allow all referrers.
-        if ($GLOBALS["PERMITTED_DOMAIN"] == "") {
-                return true;
-        }
         $referer = $_SERVER['HTTP_REFERER'];
         if (!preg_match("/^https?:\/\/([\w\d]+\.)?" . $GLOBALS["PERMITTED_DOMAIN"] . "/", $referer)) {
                 header("HTTP/1.1 401 Unauthorised");
