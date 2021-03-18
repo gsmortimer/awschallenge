@@ -1,6 +1,6 @@
 <?php
 
-echo $get_ip();
+echo get_ip();
 
 //Obtain Client's public IP
 function get_ip () {
