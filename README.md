@@ -25,3 +25,5 @@ cd ~
 git clone --depth=1 https://github.com/StartBootstrap/startbootstrap-landing-page.git
 cd ~/startbootstrap-landing-page
 sudo cp -r css vendor /var/www/<chosen-www-folder>
+  
+Modify php/vt.php to add your VirusTotal API Key
